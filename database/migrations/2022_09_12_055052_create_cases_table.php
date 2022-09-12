@@ -19,7 +19,10 @@ return new class extends Migration
                 ->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('caseSummary')->nullable();
             $table->text('caseDescription')->nullable();
-            $table->text('status')->comment('approved, pending, rejected')->nullable();
+            $table->timestamp('caseDate')->nullable();
+            $table->string('caseLocation')->nullable();
+            $table->text('ribStatus')->comment('approved, pending, rejected')->nullable();
+            $table->text('isangeStatus')->comment('pending, received and reported, rejected')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

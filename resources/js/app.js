@@ -13,6 +13,7 @@ createApp({
     .use(SpladePlugin, {
         "max_keep_alive": 10,
         "transform_anchors": true,
-        "progress_bar": true
+        "progress_bar": true,
+        "crossDomain":true,
     })
     .mount(el);

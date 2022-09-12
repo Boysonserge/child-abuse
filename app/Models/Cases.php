@@ -11,4 +11,13 @@ class Cases extends Model
     use HasFactory,SoftDeletes;
 
     protected $guarded=[];
+
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
+
+
+    protected $casts=[
+        'caseDate'=>'datetime'
+    ];
 }
