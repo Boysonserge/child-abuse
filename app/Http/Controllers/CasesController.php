@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Cases;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
 
 class CasesController extends Controller
 {
+    public $cases;
     /**
      * Display a listing of the resource.
      *
@@ -16,18 +18,14 @@ class CasesController extends Controller
      */
     public function index()
     {
-        $cases=Cases::query()->with('users')->paginate(10);
+        if (Auth::user()->hasRole('victim')){
+            $this->cases=Cases::query()->with('users')->where('user_id',auth()->id())->paginate(10);
+        }elseif (Auth::user()->hasRole('rib')){
+            $this->cases=Cases::query()->paginate(10);
+        }else{
 
-
-        return view('cases.index', [
-            'cases' => SpladeTable::for($cases)
-
-                ->column('caseSummary')
-                ->column('caseDate')
-                ->column('caseLocation')
-                ->column('ribStatus')
-                ->column('isangeStatus')
-        ]);
+        }
+        return view('cases.index',['cases'=>$this->cases]);
 
     }
 
@@ -77,22 +75,24 @@ class CasesController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Cases  $cases
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Cases $cases)
     {
-        //
+
+        return view('cases.edit',['case' => $cases]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Cases  $cases
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit(Cases $cases)
+    public function edit(Cases $cases,$id)
     {
-        //
+        $some=Cases::find($id);
+        return view('cases.edit',['case' => $some]);
     }
 
     /**

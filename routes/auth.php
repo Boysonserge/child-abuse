@@ -33,9 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
+    Route::resource('cases', CasesController::class);
     Route::group(['middleware' => ['role:victim']], function () {
-        Route::resource('cases', CasesController::class);
+
     });
 
 

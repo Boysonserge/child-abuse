@@ -18,7 +18,7 @@
                 </div>
                 <div class="mb-6">
                     <x-form.label for="caseDescription" :title="__('caseDescription')"></x-form.label>
-                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " v-model="form.caseDescription" type="text" />
+                    <textarea class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " v-model="form.caseDescription" type="text" />
 
                 </div>
                 <div class="mb-6">

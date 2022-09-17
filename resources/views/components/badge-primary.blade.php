@@ -1,3 +1,3 @@
-<div>
-    <!-- Knowing is not enough; we must apply. Being willing is not enough; we must do. - Leonardo da Vinci -->
-</div>
+<span class="bg-{{$color}}-100 text-{{$color}}-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-{{$color}}-200 dark:text-{{$color}}-800">
+    {{$value}}
+</span>
