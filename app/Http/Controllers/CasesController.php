@@ -120,6 +120,6 @@ class CasesController extends Controller
 
 
     public function approve($caseId){
-        $case=Case::find($caseId)
+       
     }
 }
