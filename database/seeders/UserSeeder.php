@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
         ])->assignRole('isange');
 
         $user=User::create([
-            'name' => "Solange Clarisse Kwizera ",
+            'name' => "Solange Clarisse Kwizera",
             'email' => "solange@gmail.com",
             'phone'=>"0781838147",
             'email_verified_at' => now(),
