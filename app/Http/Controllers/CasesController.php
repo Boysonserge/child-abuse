@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Cases;
 use App\Http\Requests\StoreCasesRequest;
 use App\Http\Requests\UpdateCasesRequest;
+use App\pkg\SendMessage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use ProtoneMedia\Splade\Facades\Toast;
 
 class CasesController extends Controller
 {
@@ -17,9 +21,9 @@ class CasesController extends Controller
     public function index()
     {
         if (Auth::user()->hasRole('victim')){
-            $this->cases=Cases::query()->with('users')->where('user_id',auth()->id())->paginate(10);
+            $this->cases=Cases::latest()->with('users')->where('user_id',auth()->id())->paginate(10);
         }elseif (Auth::user()->hasRole('rib')){
-            $this->cases=Cases::query()->paginate(10);
+            $this->cases=Cases::latest()->paginate(10);
         }else{
 
         }
@@ -102,7 +106,7 @@ class CasesController extends Controller
      */
     public function update(Request $request, Cases $cases)
     {
-        //
+
     }
 
     /**
@@ -118,6 +122,49 @@ class CasesController extends Controller
 
 
     public function approve($caseId){
+        $cases=Cases::where('id',$caseId)->with('users')->first();
+        $name=$cases->users()->first()->name;
+        $time=now();
+        $phone=$cases->users()->first()->phone;
 
+        $message="Hello $name, your case has been approved by the RIB at $time";
+
+        (new \App\pkg\SendMessage)->send($message,$phone);
+
+        $cases->update([
+            'ribStatus'=>'approved',
+            'ribStatusDate'=>now()
+        ]);
+
+        Toast::title('Success')
+            ->message('Case approved successful')
+            ->autoDismiss(3);
+        return redirect()->route('cases.index');
+    }
+
+    public function reject($caseId){
+        $cases=Cases::where('id',$caseId)->with('users')->first();
+        $name=$cases->users()->first()->name;
+        $time=now();
+        $phone=$cases->users()->first()->phone;
+
+
+        $message="Dear $name, your case has been rejected by the Rib at $time";
+
+
+        (new \App\pkg\SendMessage)->send($message,$phone);
+
+        $cases->update([
+            'ribStatus'=>'rejected',
+            'ribStatusDate'=>now()
+        ]);
+
+
+
+        Toast::title('Rejected')
+            ->message('Case rejected successful')
+            ->autoDismiss(3)
+            ->danger();
+        return redirect()->route('cases.index');
     }
 }

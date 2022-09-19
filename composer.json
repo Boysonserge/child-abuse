@@ -10,6 +10,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "propaganistas/laravel-phone": "^4.3",
         "protonemedia/laravel-splade": "^0.4.21",
         "protonemedia/laravel-splade-breeze": "^1.0",
         "spatie/laravel-permission": "^5.5"

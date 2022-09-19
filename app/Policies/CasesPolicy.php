@@ -30,7 +30,7 @@ class CasesPolicy
      */
     public function view(User $user, Cases $cases)
     {
-        //
+        return true;
     }
 
     /**

@@ -13,7 +13,13 @@
                     <div class="overflow-x-auto relative  sm:rounded-lg">
                         <div class="flex justify-between items-center pb-4 bg-white ">
                             <div>
+
+                                    @if(auth()->user()->hasRole('victim') )
+
+
                                 <Link modal href="{{ route('cases.create') }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ New case</Link>
+                                    @endif
+
 
                             </div>
                             <label for="table-search" class="sr-only">Search</label>
@@ -67,7 +73,7 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center">
-                                            <x-badge color="green" value="{{$value->ribStatus}}"></x-badge>
+                                            <x-badge color="{{$value->ribStatus === 'rejected' ? 'red' : 'blue'}}" value="{{$value->ribStatus}}"></x-badge>
                                         </div>
                                     </td>
 
@@ -82,12 +88,14 @@
                                         </div>
                                     </td>
 
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center">
-                                            <Link slideover  href="{{ route('cases.edit',$value->id) }}">View case</Link>
-{{--                                            <x-button link="{{ route('cases.show',$value->id) }}" value="View case" color="green"></x-button>--}}
-                                        </div>
-                                    </td>
+                                    @if(!auth()->user()->hasRole('victim') )
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center">
+                                                <Link slideover  href="{{ route('cases.edit',$value->id) }}">View case</Link>
+                                                {{--                                            <x-button link="{{ route('cases.show',$value->id) }}" value="View case" color="green"></x-button>--}}
+                                            </div>
+                                        </td>
+                                    @endif
                                 </tr>
                             @empty
                                 <tr class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap ">

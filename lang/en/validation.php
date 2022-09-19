@@ -170,4 +170,7 @@ return [
 
     'attributes' => [],
 
+    'phone' => 'The :attribute field contains an invalid number.    eg: +250780000000',
+
+
 ];

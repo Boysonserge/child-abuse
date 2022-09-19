@@ -33,7 +33,22 @@ Route::middleware('auth')->group(function () {
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-    Route::resource('cases', CasesController::class);
+    Route::get('/', [CasesController::class, 'index'])->name('cases.index');
+    Route::post('cases', [CasesController::class, 'store'])->name('cases.store')->middleware(['role:victim']);
+    Route::get('/cases/create', [CasesController::class, 'create'])->name('cases.create')->middleware(['role:victim']);
+    Route::get('/cases/{case}', [CasesController::class, 'show'])->name('cases.show');
+    Route::put('/cases/{case}', [CasesController::class, 'update'])->name('cases.update');
+    Route::delete('/cases/{case}', [CasesController::class, 'destroy'])->name('cases.destroy');
+    Route::get('/cases/{case}/edit', [CasesController::class, 'edit'])->name('cases.edit');
+
+    //Approving Cases
+    Route::put('/cases/{case}', [CasesController::class, 'approve'])->name('cases.approve')->middleware(['role:rib']);
+    Route::get('/cases/{case}/approve', [CasesController::class, 'approve'])->name('cases.approve')->middleware(['role:rib']);
+
+    //Rejecting Cases
+    Route::put('/cases/{case}', [CasesController::class, 'reject'])->name('cases.reject')->middleware(['role:rib']);
+    Route::get('/cases/{case}/reject', [CasesController::class, 'reject'])->name('cases.reject')->middleware(['role:rib']);
+
     Route::group(['middleware' => ['role:victim']], function () {
 
     });
