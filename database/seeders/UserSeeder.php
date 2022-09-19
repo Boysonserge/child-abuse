@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $user=User::create([
             'name' => "Rwanda Investigation Bureau",
             'email' => "rib@gmail.com",
-            'phone'=>"0788311164",
+            'phone'=>"+250788311164",
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
         $user=User::create([
             'name' => "Solange Clarisse Kwizera",
             'email' => "solange@gmail.com",
-            'phone'=>"0781838147",
+            'phone'=>"+250781838147",
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
