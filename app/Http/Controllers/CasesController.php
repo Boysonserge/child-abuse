@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cases;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use ProtoneMedia\Splade\Facades\Toast;
-use ProtoneMedia\Splade\SpladeTable;
+use App\Http\Requests\StoreCasesRequest;
+use App\Http\Requests\UpdateCasesRequest;
 
 class CasesController extends Controller
 {
@@ -120,6 +118,6 @@ class CasesController extends Controller
 
 
     public function approve($caseId){
-       
+
     }
 }

@@ -10,8 +10,6 @@ class Cases extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $guarded=[];
-
     public function users(){
         return $this->belongsTo(User::class,'user_id');
     }
