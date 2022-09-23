@@ -17,7 +17,7 @@
         <img width="100" src="https://pbs.twimg.com/profile_images/986436725101735937/NF7naQNc_400x400.jpg" alt="">
         @else
             <div class="mt-8 text-sm font-bold">
-                <a modal href="cases/create" class="text-white bg-blue-600 p-2 rounded">Create a case now</a>
+                <a modal href="{{route('cases.create')}}" class="text-white bg-blue-600 p-2 rounded">Create a case now</a>
             </div>
         @endrole
 

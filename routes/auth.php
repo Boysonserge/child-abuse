@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CasesController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -33,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-    Route::get('/', [CasesController::class, 'index'])->name('cases.index');
+    Route::get('/cases', [CasesController::class, 'index'])->name('cases.index');
     Route::post('cases', [CasesController::class, 'store'])->name('cases.store')->middleware(['role:victim']);
     Route::get('/cases/create', [CasesController::class, 'create'])->name('cases.create')->middleware(['role:victim']);
     Route::get('/cases/{case}', [CasesController::class, 'show'])->name('cases.show');
@@ -48,6 +49,9 @@ Route::middleware('auth')->group(function () {
     //Rejecting Cases
     Route::put('/cases/{case}', [CasesController::class, 'reject'])->name('cases.reject')->middleware(['role:rib']);
     Route::get('/cases/{case}/reject', [CasesController::class, 'reject'])->name('cases.reject')->middleware(['role:rib']);
+
+    Route::get('profile', [ProfileController::class,'index'])->name('profile.index');
+    Route::post('profile', [ProfileController::class,'update'])->name('profile.update');
 
     Route::group(['middleware' => ['role:victim']], function () {
 
