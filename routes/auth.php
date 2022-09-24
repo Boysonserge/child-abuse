@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/cases/{case}', [CasesController::class, 'update'])->name('cases.update');
     Route::delete('/cases/{case}', [CasesController::class, 'destroy'])->name('cases.destroy');
     Route::get('/cases/{case}/edit', [CasesController::class, 'edit'])->name('cases.edit');
+    Route::get('/cases/{case}/report', [CasesController::class, 'report'])->name('cases.report');
+    Route::post('cases/sendReport/{caseId}', [CasesController::class, 'sendReport'])->name('cases.sendReport');
 
     //Approving Cases
     Route::put('/cases/{case}', [CasesController::class, 'approve'])->name('cases.approve')->middleware(['role:rib']);

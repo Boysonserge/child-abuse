@@ -15,6 +15,10 @@ class Cases extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function reports(){
+        return $this->hasMany(Report::class,'case_id');
+    }
+
 
     protected $casts=[
         'caseDate'=>'datetime',

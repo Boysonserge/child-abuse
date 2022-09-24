@@ -24,6 +24,8 @@ class CasesController extends Controller
             $this->cases=Cases::latest()->with('users')->where('user_id',auth()->id())->paginate(10);
         }elseif (Auth::user()->hasRole('rib')){
             $this->cases=Cases::latest()->paginate(10);
+        }elseif (Auth::user()->hasRole('isange')){
+            $this->cases=Cases::query()->where('ribStatus','approved')->paginate(10);
         }else{
 
         }
@@ -95,6 +97,48 @@ class CasesController extends Controller
     {
         $some=Cases::find($id);
         return view('cases.edit',['case' => $some]);
+    }
+
+    /**
+     * Display specified case to be reported
+     *
+     * @param  \App\Models\Cases  $cases
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function report($id){
+        $some=Cases::find($id);
+        return view('cases.report',
+            [
+                'case' => $some
+            ]);
+    }
+
+    /**
+     * Report specified case
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Cases  $cases
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function sendReport(Request $request,$caseId){
+        $validates=$request->validate([
+            'reportDescription'=>'required|string',
+            'reportStatus'=>'required|string',
+        ]);
+        $case=Cases::find($caseId);
+        $case->update([
+            'isangeStatus'=>'Reported',
+        ]);
+        $case->reports()->create([
+            'reporter_id'=>auth()->id(),
+            'reportDescription'=>$validates['reportDescription'],
+            'reportStatus'=>$validates['reportStatus'],
+        ]);
+
+        Toast::title('Success')
+            ->message('Report sent successful')
+            ->autoDismiss(3);
+        return redirect()->route('cases.index');
     }
 
     /**
