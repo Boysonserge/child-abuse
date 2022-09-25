@@ -14,14 +14,11 @@
                         <div class="flex justify-between items-center pb-4 bg-white ">
                             <div>
 
-                                @role('victim')
-                                <Link modal href="{{ route('cases.create') }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ New case</Link>
-                                @endrole
+
 
                                 @role('rib')
-                                <Link  href="{{ route('rib.createcase') }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ New case #</Link>
+                                <Link modal href="{{ route('users.create') }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ New user</Link>
                                 @endrole
-
 
 
                             </div>
@@ -45,48 +42,48 @@
                                 <th scope="col" class="py-3 px-6">
                                     User info
                                 </th>
+
                                 <th scope="col" class="py-3 px-6">
-                                    Case
-                                </th>
-                                <th scope="col" class="py-3 px-6">
-                                    Rib Status
+                                    Id number
                                 </th>
 
                                 <th scope="col" class="py-3 px-6">
-                                    Isange Status
+                                    Email
                                 </th>
 
                                 <th scope="col" class="py-3 px-6">
-                                    Reported since
+                                    Cases reported
+                                </th>
+
+                                <th scope="col" class="py-3 px-6">
+                                    First Joined at
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($cases as $case=>$value)
+                            @forelse($users as $user=>$value)
 
                                 <tr class="bg-white border-b  hover:bg-gray-50 ">
                                     <th scope="row" class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap ">
                                         <div class="pl-3">
-                                            <div class="text-base font-semibold">{{$value->users->name}}</div>
-                                            <div class="font-normal text-gray-500">{{$value->users->email }}</div>
+                                            <div class="text-base font-semibold">{{$value->name}}</div>
+                                            <div class="font-normal text-gray-500">{{$value->email }}</div>
                                         </div>
                                     </th>
                                     <td class="py-4 px-6">
-                                        {{$value->caseSummary}}
+                                        {{$value->idNumber}}
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center">
-                                            <x-badge color="{{$value->ribStatus === 'rejected' ? 'red' : 'blue'}}" value="{{$value->ribStatus}}"></x-badge>
+                                            {{$value->email}}
                                         </div>
                                     </td>
 
                                     <td class="py-4 px-6">
                                         <div class="flex items-center">
-                                            <x-badge color="blue" value="{{$value->isangeStatus}}"></x-badge>
+                                            <x-badge color="red" value="{{$value->cases_count}}"></x-badge>
                                         </div>
                                     </td>
-
-
 
                                     <td class="py-4 px-6">
                                         <div class="flex items-center">
@@ -95,39 +92,17 @@
                                     </td>
 
 
-                                    @role('isange')
-                                    @if($value->isangeStatus == 'Reported')
-                                        <div class="flex items-center">
-                                            <Link modal href="{{route('cases.getReport',$value->id)}}" class="text-white bg-green-700 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">View report</Link>
-                                        </div>
-                                    @else
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center">
-                                                <Link modal href="{{route('cases.report',$value->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create report</Link>
-                                            </div>
-                                        </td>
-                                    @endif
-                                    @endrole
-
-                                    @role('rib')
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center">
-                                            <Link slideover  href="{{ route('cases.edit',$value->id) }}">View case</Link>
-                                            {{--                                            <x-button link="{{ route('cases.show',$value->id) }}" value="View case" color="green"></x-button>--}}
-                                        </div>
-                                    </td>
-                                    @endrole
                                 </tr>
                             @empty
                                 <tr class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap ">
                                     <td scope="row" class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap " colspan="4">
-                                        No cases yet
+                                        No users yet
                                     </td>
                                 </tr>
                             @endforelse
                             </tbody>
                         </table>
-                        {{$cases->links()}}
+                        {{$users->links()}}
                     </div>
                 </div>
             </div>

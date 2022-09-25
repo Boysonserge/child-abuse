@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Cases;
 use App\Http\Requests\StoreCasesRequest;
 use App\Http\Requests\UpdateCasesRequest;
+use App\Models\Report;
+use App\Models\User;
 use App\pkg\SendMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +45,12 @@ class CasesController extends Controller
         return view('cases.create');
     }
 
+    public function create2()
+    {
+        $users=User::role('victim')->pluck('name','id');
+
+        return view('cases.create2',compact('users'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -62,6 +70,35 @@ class CasesController extends Controller
         Cases::create([
             'user_id'=>auth()->id(),
             'ribStatus'=>'pending',
+            'isangeStatus'=>'pending',
+            'caseSummary'=>$validates['caseSummary'],
+            'caseDescription'=>$validates['caseDescription'],
+            'caseDate'=>$validates['caseDate'],
+            'caseLocation'=>$validates['caseLocation']
+        ]);
+
+        Toast::title('Success')
+            ->message('Case created successful')
+            ->autoDismiss(3);
+        return redirect()->route('cases.index');
+    }
+
+
+    public function store2(Request $request)
+    {
+
+
+        $validates=$request->validate([
+            'caseSummary'=>'required|string',
+            'caseDescription'=>'required|string',
+            'caseDate'=>'required',
+            'caseLocation'=>'required|string',
+            'user'=>'required|integer',
+
+        ]);
+        Cases::create([
+            'user_id'=>$validates['user'],
+            'ribStatus'=>'approved',
             'isangeStatus'=>'pending',
             'caseSummary'=>$validates['caseSummary'],
             'caseDescription'=>$validates['caseDescription'],
@@ -211,4 +248,25 @@ class CasesController extends Controller
             ->danger();
         return redirect()->route('cases.index');
     }
+
+
+    /**
+     * Display specified report to be viewed
+     *
+     * @param  \App\Models\Report $report
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+
+    public function getReport($id)
+    {
+        $case=Cases::find($id);
+        $report=$case->reports()->first();
+
+
+        return view('cases.reportview',
+            [
+                'report' => $report
+            ]);
+    }
+
 }

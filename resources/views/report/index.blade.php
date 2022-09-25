@@ -14,15 +14,11 @@
                         <div class="flex justify-between items-center pb-4 bg-white ">
                             <div>
 
-                                @role('victim')
+                                    @if(auth()->user()->hasRole('victim') )
+
+
                                 <Link modal href="{{ route('cases.create') }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ New case</Link>
-                                @endrole
-
-                                @role('rib')
-                                <Link  href="{{ route('rib.createcase') }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ New case #</Link>
-                                @endrole
-
-
+                                    @endif
 
                             </div>
                             <label for="table-search" class="sr-only">Search</label>
@@ -34,11 +30,6 @@
                             </div>--}}
                         </div>
 
-
-
-
-
-
                         <table class="w-full text-sm text-left text-gray-500 ">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                             <tr>
@@ -48,41 +39,41 @@
                                 <th scope="col" class="py-3 px-6">
                                     Case
                                 </th>
+
+
                                 <th scope="col" class="py-3 px-6">
-                                    Rib Status
+                                    Report status
                                 </th>
 
                                 <th scope="col" class="py-3 px-6">
-                                    Isange Status
+                                    Report
                                 </th>
 
-                                <th scope="col" class="py-3 px-6">
-                                    Reported since
-                                </th>
+                                <th scope="col" class="py-3 px6">Reported at</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($cases as $case=>$value)
+                            @forelse($reports as $value)
 
                                 <tr class="bg-white border-b  hover:bg-gray-50 ">
                                     <th scope="row" class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap ">
                                         <div class="pl-3">
-                                            <div class="text-base font-semibold">{{$value->users->name}}</div>
-                                            <div class="font-normal text-gray-500">{{$value->users->email }}</div>
+                                            <div class="text-base font-semibold">{{$value->cases->users->name}}</div>
+                                            <div class="font-normal text-gray-500">{{$value->cases->users->email}}</div>
                                         </div>
                                     </th>
                                     <td class="py-4 px-6">
-                                        {{$value->caseSummary}}
+                                        {{$value->cases->caseSummary}}
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center">
-                                            <x-badge color="{{$value->ribStatus === 'rejected' ? 'red' : 'blue'}}" value="{{$value->ribStatus}}"></x-badge>
+                                            <x-badge color="{{$value->reportStatus === 'Critical' ? 'red' : 'blue'}}" value="{{$value->reportStatus}}"></x-badge>
                                         </div>
                                     </td>
 
                                     <td class="py-4 px-6">
-                                        <div class="flex items-center">
-                                            <x-badge color="blue" value="{{$value->isangeStatus}}"></x-badge>
+                                        <div class="flex items-center cursor-pointer flex-wrap">
+                                            <x-badge color="blue" value="{{$value->reportDescription}}"></x-badge>
                                         </div>
                                     </td>
 
@@ -95,28 +86,7 @@
                                     </td>
 
 
-                                    @role('isange')
-                                    @if($value->isangeStatus == 'Reported')
-                                        <div class="flex items-center">
-                                            <Link modal href="{{route('cases.getReport',$value->id)}}" class="text-white bg-green-700 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">View report</Link>
-                                        </div>
-                                    @else
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center">
-                                                <Link modal href="{{route('cases.report',$value->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create report</Link>
-                                            </div>
-                                        </td>
-                                    @endif
-                                    @endrole
 
-                                    @role('rib')
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center">
-                                            <Link slideover  href="{{ route('cases.edit',$value->id) }}">View case</Link>
-                                            {{--                                            <x-button link="{{ route('cases.show',$value->id) }}" value="View case" color="green"></x-button>--}}
-                                        </div>
-                                    </td>
-                                    @endrole
                                 </tr>
                             @empty
                                 <tr class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap ">
@@ -127,7 +97,7 @@
                             @endforelse
                             </tbody>
                         </table>
-                        {{$cases->links()}}
+
                     </div>
                 </div>
             </div>

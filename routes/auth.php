@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\CasesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -42,21 +44,29 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cases/{case}', [CasesController::class, 'destroy'])->name('cases.destroy');
     Route::get('/cases/{case}/edit', [CasesController::class, 'edit'])->name('cases.edit');
     Route::get('/cases/{case}/report', [CasesController::class, 'report'])->name('cases.report');
+    Route::get('/cases/{report}/getReport', [CasesController::class, 'getReport'])->name('cases.getReport');
     Route::post('cases/sendReport/{caseId}', [CasesController::class, 'sendReport'])->name('cases.sendReport');
 
-    //Approving Cases
-    Route::put('/cases/{case}', [CasesController::class, 'approve'])->name('cases.approve')->middleware(['role:rib']);
-    Route::get('/cases/{case}/approve', [CasesController::class, 'approve'])->name('cases.approve')->middleware(['role:rib']);
 
-    //Rejecting Cases
-    Route::put('/cases/{case}', [CasesController::class, 'reject'])->name('cases.reject')->middleware(['role:rib']);
-    Route::get('/cases/{case}/reject', [CasesController::class, 'reject'])->name('cases.reject')->middleware(['role:rib']);
 
     Route::get('profile', [ProfileController::class,'index'])->name('profile.index');
     Route::post('profile', [ProfileController::class,'update'])->name('profile.update');
 
-    Route::group(['middleware' => ['role:victim']], function () {
+    Route::group(['middleware' => ['role:rib']], function () {
+        //Approving Cases
+        Route::put('/cases/{case}', [CasesController::class, 'approve'])->name('cases.approve');
+        Route::get('/cases/{case}/approve', [CasesController::class, 'approve'])->name('cases.approve');
 
+        Route::resource('report', ReportController::class);
+
+        //Rejecting Cases
+        Route::put('/cases/{case}', [CasesController::class, 'reject'])->name('cases.reject');
+        Route::get('/cases/{case}/reject', [CasesController::class, 'reject'])->name('cases.reject');
+
+        Route::resource('users', UserController::class);
+
+        Route::get('/ribcase/create', [CasesController::class, 'create2'])->name('rib.createcase');
+        Route::post('/ribcase', [CasesController::class, 'store2'])->name('rib.storecase');
     });
 
 

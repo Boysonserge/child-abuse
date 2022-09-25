@@ -25,6 +25,22 @@
                         </x-nav-link>
                     </div>
 
+                    @role('rib')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('report.index')" :active="request()->routeIs('report.index')">
+                            {{ __('Report from isange') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('USERS (Victims)') }}
+                        </x-nav-link>
+                    </div>
+
+
+                    @endrole
+
 
 
                 </div>
