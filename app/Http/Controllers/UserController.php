@@ -40,11 +40,9 @@ class UserController extends Controller
     {
         $validates=$request->validate([
             'name'=>'required|string',
-            'phone'=>'required|string',
+            'phone'=>'required_without:email|',
+            'email'=>'required_without:phone|',
             'idNumber'=>'required',
-            'email'=>'nullable|string',
-
-
         ]);
         User::create([
                'name'=>$validates['name'],

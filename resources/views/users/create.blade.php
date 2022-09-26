@@ -10,10 +10,16 @@
 
 
             <x-splade-form action="{{route('users.store')}}" method="POST">
+                <x-splade-errors>
+                    <div v-for="(errors, key) in errors.all">
+                        <span v-text="errors" />
+                    </div>
+                </x-splade-errors>
 
                 <div class="mb-6">
                     <x-form.label for="name" :title="__('name')"></x-form.label>
                     <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " v-model="form.name" type="text" />
+
                 </div>
                 <div class="mb-6">
                     <x-form.label for="email" :title="__('email')"></x-form.label>
