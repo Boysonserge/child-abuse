@@ -8,7 +8,7 @@
 
         <x-splade-form action="{{ route('login') }}" class="space-y-4">
             <!-- Email Address -->
-            <x-splade-input id="email" type="email" name="email" :label="__('Email')" required autofocus />
+            <x-splade-input id="email" type="text" name="email" :label="__('Enter your email or phone')" required autofocus />
             <x-splade-input id="password" type="password" name="password" :label="__('Password')" required autocomplete="current-password" />
             <x-splade-checkbox id="remember_me" name="remember" :label="__('Remember me')" />
 

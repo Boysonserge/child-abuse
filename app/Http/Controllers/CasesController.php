@@ -96,6 +96,7 @@ class CasesController extends Controller
             'user'=>'required|integer',
 
         ]);
+
         Cases::create([
             'user_id'=>$validates['user'],
             'ribStatus'=>'approved',
