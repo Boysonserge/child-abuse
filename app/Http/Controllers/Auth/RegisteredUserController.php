@@ -36,9 +36,10 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required_without:phone', 'string', 'email', 'max:255', 'unique:users'],
+
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone'=>[Rule::phone()->country('RW'),'unique:users'],
+            'email' => ['nullable', 'string', 'max:255', 'unique:users'],
             'idNumber'=>['unique:users','digits:16'],
         ]);
 

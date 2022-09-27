@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cases;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use ProtoneMedia\Splade\Facades\Toast;
 
 class UserController extends Controller
@@ -39,10 +40,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validates=$request->validate([
-            'name'=>'required|string',
-            'phone'=>'required_without:email|',
-            'email'=>'required_without:phone|',
-            'idNumber'=>'required',
+            'name' => ['required', 'string', 'max:255'],
+            'phone'=>[Rule::phone()->country('RW'),'unique:users'],
+            'email' => ['nullable', 'string', 'max:255', 'unique:users'],
+            'idNumber'=>['unique:users','digits:16'],
         ]);
         User::create([
                'name'=>$validates['name'],
