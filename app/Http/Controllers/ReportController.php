@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cases;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use ProtoneMedia\Splade\Facades\Toast;
 
 class ReportController extends Controller
 {
@@ -59,11 +60,22 @@ class ReportController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
-        //
+        $report=Report::findOrFail($id);
+        $severity= [
+            'Common'=>'Common',
+            'Medium'=>'Medium',
+            'Critical'=>'Critical',
+
+        ];
+        return view('report.edit',[
+            'report'=>$report,
+            'id'=>$id,
+            'severity'=>$severity,
+        ]);
     }
 
     /**
@@ -75,7 +87,13 @@ class ReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $report=Report::findOrFail($id);
+        $report->update($request->all());
+
+        Toast::title('Success')
+            ->message('Case approved successful')
+            ->autoDismiss(3);
+        return redirect()->route('cases.index');
     }
 
     /**

@@ -23,7 +23,7 @@
                 </div>
                 <div class="mb-6">
                     <x-form.label for="caseDate" :title="__('caseDate')"></x-form.label>
-                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " v-model="form.caseDate" type="date" />
+                    <input max="<?php echo date("Y-m-d"); ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " v-model="form.caseDate" type="date" />
                 </div>
                 <div class="mb-6">
                     <x-form.label for="caseLocation" :title="__('caseLocation')"></x-form.label>

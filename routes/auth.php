@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/cases/{case}', [CasesController::class, 'approve'])->name('cases.approve');
         Route::get('/cases/{case}/approve', [CasesController::class, 'approve'])->name('cases.approve');
 
-        Route::resource('report', ReportController::class);
+
 
         //Rejecting Cases
         Route::put('/cases/{case}', [CasesController::class, 'reject'])->name('cases.reject');
@@ -68,6 +68,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/ribcase/create', [CasesController::class, 'create2'])->name('rib.createcase');
         Route::post('/ribcase', [CasesController::class, 'store2'])->name('rib.storecase');
     });
-
+    Route::resource('report', ReportController::class);
 
 });
