@@ -12,6 +12,7 @@ use App\Http\Controllers\CasesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -67,6 +68,13 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/ribcase/create', [CasesController::class, 'create2'])->name('rib.createcase');
         Route::post('/ribcase', [CasesController::class, 'store2'])->name('rib.storecase');
+
+
+        Route::get('export', function () {
+            $pdf = Pdf::loadView('export.report');
+            return $pdf->download('invoice.pdf');
+//           return view('export.report');
+        })->name('export');
     });
     Route::resource('report', ReportController::class);
 

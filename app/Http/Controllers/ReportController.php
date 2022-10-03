@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Cases;
 use App\Models\Report;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\Facades\Toast;
 
 class ReportController extends Controller
 {
+    public function export()
+    {
+        $pdf = PDF::loadView('export.report');
+        return $pdf->download('report.pdf');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -106,4 +113,7 @@ class ReportController extends Controller
     {
         //
     }
+
+
+
 }
