@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg shadow-md">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <div class="overflow-x-auto relative  sm:rounded-lg">
+                    < class="overflow-x-auto relative  sm:rounded-lg">
                         <div class="flex justify-between items-center pb-4 bg-white ">
                             <div>
 
@@ -93,6 +93,14 @@
                                             <x-badge color="yellow" value="{{\Carbon\Carbon::make($value->created_at)->diffForHumans()}}"></x-badge>
                                         </div>
                                     </td>
+
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <Link modal href="">
+                                        </div>
+                                    </td>
+
+
 
                                     @role('isange')
                                     @if($value->isangeStatus == 'Reported')

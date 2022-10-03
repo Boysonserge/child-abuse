@@ -59,14 +59,22 @@ class CasesController extends Controller
      */
     public function store(Request $request)
     {
+        $fileName="";
 
         $validates=$request->validate([
             'caseSummary'=>'required|string',
             'caseDescription'=>'required|string',
             'caseDate'=>'required',
             'caseLocation'=>'required|string',
+            'photo' =>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
 
         ]);
+        if ($request->hasFile('photo')){
+            $photo=$request->file('photo');
+            $fileName = time().'_.'.$photo->getClientOriginalExtension();
+            $photo->move(public_path('photos'), $fileName);
+        }
+
         Cases::create([
             'user_id'=>auth()->id(),
             'ribStatus'=>'pending',
@@ -74,7 +82,8 @@ class CasesController extends Controller
             'caseSummary'=>$validates['caseSummary'],
             'caseDescription'=>$validates['caseDescription'],
             'caseDate'=>$validates['caseDate'],
-            'caseLocation'=>$validates['caseLocation']
+            'caseLocation'=>$validates['caseLocation'],
+            'photo'=>$fileName,
         ]);
 
         Toast::title('Success')
@@ -86,7 +95,7 @@ class CasesController extends Controller
 
     public function store2(Request $request)
     {
-
+        $fileName="";
 
         $validates=$request->validate([
             'caseSummary'=>'required|string',
@@ -94,8 +103,14 @@ class CasesController extends Controller
             'caseDate'=>'required',
             'caseLocation'=>'required|string',
             'user'=>'required|integer',
+            'photo' =>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
 
         ]);
+        if ($request->hasFile('photo')){
+            $photo=$request->file('photo');
+            $fileName = time().'_.'.$photo->getClientOriginalExtension();
+            $photo->move(public_path('photos'), $fileName);
+        }
 
         Cases::create([
             'user_id'=>$validates['user'],
@@ -104,7 +119,8 @@ class CasesController extends Controller
             'caseSummary'=>$validates['caseSummary'],
             'caseDescription'=>$validates['caseDescription'],
             'caseDate'=>$validates['caseDate'],
-            'caseLocation'=>$validates['caseLocation']
+            'caseLocation'=>$validates['caseLocation'],
+            'photo'=>$fileName,
         ]);
 
         Toast::title('Success')
