@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg shadow-md">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    < class="overflow-x-auto relative  sm:rounded-lg">
+                    <div class="overflow-x-auto relative  sm:rounded-lg">
                         <div class="flex justify-between items-center pb-4 bg-white ">
                             <div>
 
@@ -94,21 +94,17 @@
                                         </div>
                                     </td>
 
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center">
-                                            <Link modal href="">
-                                        </div>
-                                    </td>
-
-
-
                                     @role('isange')
                                     @if($value->isangeStatus == 'Reported')
-                                        <div class="flex items-center">
-                                            <Link modal href="{{route('cases.getReport',$value->id)}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">View report</Link>
-                                            <Link modal href="{{route('report.edit',$value->id)}}" class="text-white bg-green-700 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">Edit report</Link>
-                                        </div>
+                                        <div class="flex">
+                                            <div class="flex items-center">
+                                                <Link modal href="{{route('cases.getReport',$value->id)}}" class="text-white bg-green-700 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">View report</Link>
+                                            </div>
 
+                                            <div class="flex items-center">
+                                                <Link slideover href="{{route('report.edit',$value->id)}}" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-2 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Edit report</Link>
+                                            </div>
+                                        </div>
                                     @else
                                         <td class="py-4 px-6">
                                             <div class="flex items-center">
