@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::post('cases', [CasesController::class, 'store'])->name('cases.store')->middleware(['role:victim']);
     Route::get('/cases/create', [CasesController::class, 'create'])->name('cases.create')->middleware(['role:victim']);
     Route::get('/cases/{case}', [CasesController::class, 'show'])->name('cases.show');
+    Route::get('view/case/{case}', [CasesController::class, 'viewCase'])->name('cases.view');
+
     Route::put('/cases/{case}', [CasesController::class, 'update'])->name('cases.update');
     Route::delete('/cases/{case}', [CasesController::class, 'destroy'])->name('cases.destroy');
     Route::get('/cases/{case}/edit', [CasesController::class, 'edit'])->name('cases.edit');

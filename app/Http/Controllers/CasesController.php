@@ -137,7 +137,6 @@ class CasesController extends Controller
      */
     public function show(Cases $cases)
     {
-
         return view('cases.edit',['case' => $cases]);
     }
 
@@ -162,6 +161,14 @@ class CasesController extends Controller
     public function report($id){
         $some=Cases::find($id);
         return view('cases.report',
+            [
+                'case' => $some
+            ]);
+    }
+
+    public function viewCase($id){
+        $some=Cases::find($id);
+        return view('cases.view',
             [
                 'case' => $some
             ]);

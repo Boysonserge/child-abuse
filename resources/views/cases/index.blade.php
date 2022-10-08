@@ -59,6 +59,9 @@
                                 <th scope="col" class="py-3 px-6">
                                     Reported since
                                 </th>
+                                <th scope="col" class="py-3 px-6">
+                                    View
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -91,6 +94,13 @@
                                     <td class="py-4 px-6">
                                         <div class="flex items-center">
                                             <x-badge color="yellow" value="{{\Carbon\Carbon::make($value->created_at)->diffForHumans()}}"></x-badge>
+                                        </div>
+                                    </td>
+
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <Link slideover href="{{route('cases.view',['case'=>$value->id])}}" >
+                                            View case</Link>
                                         </div>
                                     </td>
 
