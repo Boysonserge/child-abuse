@@ -127,7 +127,7 @@
                                     @role('rib')
                                     <td class="py-4 px-6">
                                         <div class="flex items-center">
-                                            <Link slideover  href="{{ route('cases.edit',$value->id) }}">View case</Link>
+                                            <Link slideover  href="{{ route('cases.edit',$value->id) }}">Approve / Reject</Link>
                                             {{--                                            <x-button link="{{ route('cases.show',$value->id) }}" value="View case" color="green"></x-button>--}}
                                         </div>
                                     </td>
