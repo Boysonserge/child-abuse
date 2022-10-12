@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ReportsExport;
 use App\Models\Cases;
 use App\Models\Report;
 
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Maatwebsite\Excel\Facades\Excel;
 use ProtoneMedia\Splade\Facades\Toast;
 
 class ReportController extends Controller
 {
     public function export()
     {
-        $pdf = PDF::loadView('export.report');
-        return $pdf->download('report.pdf');
+        return Excel::download(new ReportsExport, 'reports.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
     /**
      * Display a listing of the resource.

@@ -9,7 +9,7 @@
         <x-application-logo class="block h-12 w-auto" />
 
         <div class="mt-8 text-2xl">
-            Welcome to  <block><b class="uppercase">Child abuse monitoring Information System</b></block>
+            Welcome to  <block><b class="uppercase">Child Abuse Information Monitoring System</b></block>
         </div>
 
 

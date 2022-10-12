@@ -72,11 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/ribcase', [CasesController::class, 'store2'])->name('rib.storecase');
 
 
-        Route::get('export', function () {
-            $pdf = Pdf::loadView('export.report');
-            return $pdf->download('invoice.pdf');
-//           return view('export.report');
-        })->name('export');
+        Route::get('export',[ReportController::class,'export'])->name('export');
     });
     Route::resource('report', ReportController::class);
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Child abuse monitoring information system</title>
+    <title>Child Abuse Information Monitoring System</title>
     <meta name="description" content="Get started with a free landing page built with Tailwind CSS and the Flowbite Blocks system.">
     <link href="{{asset('css/output.css')}}" rel="stylesheet">
 </head>
@@ -13,8 +13,8 @@
     <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <a href="https://flowbite.com" class="flex items-center">
-                <img src="https://res.cloudinary.com/dpxr46hv6/image/upload/v1662830934/logo_cxsmt8.svg" class="mr-3 h-6 sm:h-9" alt="CAMIS Logo" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">CAM.IS</span>
+                <img src="https://res.cloudinary.com/dpxr46hv6/image/upload/v1662830934/logo_cxsmt8.svg" class="mr-3 h-6 sm:h-9" alt="CAIMS Logo" />
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">CAIMS</span>
             </a>
             <div class="flex items-center lg:order-2">
                 @if(auth()->check())
@@ -54,7 +54,7 @@
 <section class="bg-white">
     <div class="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div class="place-self-center mr-auto lg:col-span-7">
-            <h2 class="mb-4 max-w-2xl font-extrabold leading-none md:text-5xl dark:text-gray-300  ">Welcome to Child abuse monitoring Information System</h2>
+            <h2 class="mb-4 max-w-2xl font-extrabold leading-none md:text-5xl dark:text-gray-300  ">Welcome to Child Abuse Information Monitoring System</h2>
             <p class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">We help victims to report their cases to RIB in the appropriate time and immediately sends information to Isange One Stop Center if any medical process needed. </p>
             <a href="{{route('register')}}" class="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                 Get started
@@ -131,7 +131,7 @@
             <div class="mb-6 md:mb-0">
                 <a href="" class="flex items-center">
                     <img src="https://res.cloudinary.com/dpxr46hv6/image/upload/v1662830934/logo_cxsmt8.svg" class="mr-3 h-8" alt="FlowBite Logo" />
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CAM.IS</span>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CAIMS</span>
                 </a>
             </div>
 

@@ -12,7 +12,7 @@ class SendMessage
         $res=$client->request('post','https://api.mista.io/sms',[
             'form_params'=>[
                 'sms'=>$message,
-                'from'=>'CAM.IS',
+                'from'=>'CAIMS',
                 'to'=>$to,
                 'action'=>'send-action'
             ],
