@@ -60,8 +60,6 @@
                 </div>
             </td>
 
-
-
             <td class="py-4 px-6">
                 <div class="flex items-center">
                     <x-badge color="yellow" value="{{\Carbon\Carbon::make($value->created_at)->diffForHumans()}}"></x-badge>
@@ -73,8 +71,6 @@
                     <x-badge color="yellow" value="{{\Carbon\Carbon::make($value->updated_at)->diffForHumans()}}"></x-badge>
                 </div>
             </td>
-
-
 
         </tr>
         <tr>

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCasesRequest;
 use App\Models\Report;
 use App\Models\User;
 use App\pkg\SendMessage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -229,10 +230,13 @@ class CasesController extends Controller
     public function approve($caseId){
         $cases=Cases::where('id',$caseId)->with('users')->first();
         $name=$cases->users()->first()->name;
-        $time=now();
+        $time=now()->format('d F, Y');
         $phone=$cases->users()->first()->phone;
 
-        $message="Hello $name, your case has been approved by the RIB at $time";
+        $nextDay= Carbon::now()->addDays(1)->format('d F, Y');
+        $timeToCome = "2:00PM";
+
+        $message="Hello $name, your case has been approved by the RIB at $time, means your report has reached to IOSC, please get there tomorrow  $nextDay at $timeToCome .Thank you!";
 
         (new \App\pkg\SendMessage)->send($message,$phone);
 
