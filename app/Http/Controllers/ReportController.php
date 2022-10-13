@@ -74,7 +74,7 @@ class ReportController extends Controller
      */
     public function edit($id)
     {
-        $report=Report::findOrFail($id);
+        $report=Report::where('case_id',$id)->first();
         $severity= [
             'Common'=>'Common',
             'Medium'=>'Medium',
@@ -97,7 +97,7 @@ class ReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $report=Report::findOrFail($id);
+        $report=Report::where('case_id',$id)->first();
         $report->update($request->all());
 
         Toast::title('Success')
