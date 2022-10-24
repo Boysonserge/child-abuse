@@ -238,7 +238,7 @@ class CasesController extends Controller
 
         $message="Hello $name, your case has been approved by the RIB at $time, means your report has reached to IOSC, please get there tomorrow  $nextDay at $timeToCome .Thank you!";
 
-        (new \App\pkg\SendMessage)->send($message,$phone);
+        (new \App\pkg\SendMessage)->send("$message",$phone);
 
         $cases->update([
             'ribStatus'=>'approved',
